@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.novasys.controller.StockController" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #f8fafc;">
+    
+    <!-- CABECALHO -->
+    <HBox style="-fx-background-color: #0f172a; -fx-padding: 15px 25px;" alignment="CENTER_LEFT">
+        <Label text="NovaSys Desktop - Movimentacao e Ajuste de Stock" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Voltar ao Painel" onAction="#aoClicarVoltar" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="15" style="-fx-padding: 15px;">
+        
+        <!-- PAINEL ESQUERDO: Formulario de Ajuste -->
+        <VBox prefWidth="360" spacing="15" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <Label text="Entrada / Ajuste de Inventario" style="-fx-font-weight: bold; -fx-font-size: 15px;"/>
+            <Separator/>
+            
+            <VBox spacing="2">
+                <Label text="Seleccionar Produto *" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="cmbProdutos" maxWidth="Infinity" promptText="Pesquisar/Seleccionar produto..." style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Tipo de Operacao *" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="cmbTipoOperacao" maxWidth="Infinity" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Quantidade *" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtQuantidade" promptText="Ex: 50" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Motivo / Observacao" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtObservacao" promptText="Ex: Compra de fornecedor / Produto avariado" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <Label fx:id="lblMensagem" wrapText="true" style="-fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <Button text="CONFIRMAR AJUSTE DE STOCK" onAction="#confirmarAjuste" maxWidth="Infinity" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 42px;"/>
+        </VBox>
+
+        <!-- PAINEL DIREITO: Tabela de Estado do Inventario -->
+        <VBox HBox.hgrow="ALWAYS" spacing="10" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Filtrar Tabela:" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtPesquisa" promptText="Pesquisar por nome ou codigo..." HBox.hgrow="ALWAYS" style="-fx-pref-height: 35px;"/>
+            </HBox>
+            
+            <TableView fx:id="tabelaStock" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colNome" text="Produto" prefWidth="240"/>
+                    <TableColumn fx:id="colCodigo" text="Cod. Barras" prefWidth="120"/>
+                    <TableColumn fx:id="colStockActual" text="Stock Atual" prefWidth="90"/>
+                    <TableColumn fx:id="colStockMinimo" text="Stock Min" prefWidth="90"/>
+                    <TableColumn fx:id="colEstado" text="Estado do Inventario" prefWidth="140"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>

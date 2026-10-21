@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.novasys.controller.ClientesController" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #f8fafc;">
+    
+    <!-- CABECALHO -->
+    <HBox style="-fx-background-color: #0f172a; -fx-padding: 15px 25px;" alignment="CENTER_LEFT">
+        <Label text="NovaSys Desktop - Gestao de Clientes e Contas a Receber" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Voltar ao Painel" onAction="#aoClicarVoltar" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="15" style="-fx-padding: 15px;">
+        
+        <!-- PAINEL ESQUERDO: Formulario de Registo e Liquidacao -->
+        <VBox prefWidth="350" spacing="15">
+            <!-- Formulario CRUD -->
+            <VBox spacing="10" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+                <Label text="Dados do Cliente" style="-fx-font-weight: bold; -fx-font-size: 15px;"/>
+                <Separator/>
+                
+                <VBox spacing="2">
+                    <Label text="Nome Completo *" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="txtNome" promptText="Nome do cliente..." style="-fx-pref-height: 35px;"/>
+                </VBox>
+
+                <VBox spacing="2">
+                    <Label text="Telefone" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="txtTelefone" promptText="Ex: 840000000" style="-fx-pref-height: 35px;"/>
+                </VBox>
+
+                <VBox spacing="2">
+                    <Label text="NUIT" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="txtNuit" promptText="Ex: 123456789" style="-fx-pref-height: 35px;"/>
+                </VBox>
+
+                <Label fx:id="lblMensagemCrud" wrapText="true" style="-fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+
+                <HBox spacing="10" style="-fx-padding: 10px 0 0 0;">
+                    <Button text="Salvar" onAction="#salvarCliente" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 35px;"/>
+                    <Button text="Limpar" onAction="#limparFormulario" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #64748b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 35px;"/>
+                </HBox>
+                <Button text="Apagar Cliente" onAction="#apagarCliente" maxWidth="Infinity" style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 35px;"/>
+            </VBox>
+
+            <!-- Painel de Liquidacao de Divida -->
+            <VBox spacing="10" style="-fx-background-color: #fffbeb; -fx-padding: 15px; -fx-background-radius: 8px; -fx-border-color: #fcd34d; -fx-border-radius: 8px;">
+                <Label text="Liquidacao de Divida (Fiado)" style="-fx-font-weight: bold; -fx-font-size: 15px; -fx-text-fill: #92400e;"/>
+                <Separator/>
+                
+                <Label fx:id="lblNomeClienteDivida" text="Nenhum cliente selecionado" style="-fx-font-weight: bold; -fx-text-fill: #b45309;"/>
+                <HBox alignment="CENTER_LEFT" spacing="5">
+                    <Label text="Saldo Atual:" style="-fx-text-fill: #92400e;"/>
+                    <Label fx:id="lblSaldoDevedor" text="0.00 MT" style="-fx-font-size: 18px; -fx-font-weight: bold; -fx-text-fill: #dc2626;"/>
+                </HBox>
+
+                <VBox spacing="2">
+                    <Label text="Valor a Amortizar (MT):" style="-fx-font-weight: bold; -fx-text-fill: #92400e;"/>
+                    <TextField fx:id="txtValorLiquidar" promptText="0.00" style="-fx-pref-height: 35px;"/>
+                </VBox>
+
+                <Button text="Liquidar Valor" onAction="#liquidarDivida" maxWidth="Infinity" style="-fx-background-color: #d97706; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 35px;"/>
+                <Label fx:id="lblMensagemDivida" wrapText="true" style="-fx-font-weight: bold; -fx-text-fill: #dc2626; -fx-font-size: 11px;"/>
+            </VBox>
+        </VBox>
+
+        <!-- PAINEL DIREITO: Tabela e Pesquisa -->
+        <VBox HBox.hgrow="ALWAYS" spacing="10" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Pesquisar:" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtPesquisa" promptText="Pesquisar por nome ou NUIT..." HBox.hgrow="ALWAYS" style="-fx-pref-height: 35px;"/>
+            </HBox>
+            
+            <TableView fx:id="tabelaClientes" VBox.vgrow="ALWAYS" onMouseClicked="#selecionarCliente">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="50"/>
+                    <TableColumn fx:id="colNome" text="Nome Completo" prefWidth="250"/>
+                    <TableColumn fx:id="colTelefone" text="Telefone" prefWidth="120"/>
+                    <TableColumn fx:id="colNuit" text="NUIT" prefWidth="120"/>
+                    <TableColumn fx:id="colSaldo" text="Saldo Devedor (MT)" prefWidth="150"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>

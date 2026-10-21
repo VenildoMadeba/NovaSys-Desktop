@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.novasys.controller.ProdutosController" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #f8fafc;">
+    
+    <!-- CABECALHO -->
+    <HBox style="-fx-background-color: #0f172a; -fx-padding: 15px 25px;" alignment="CENTER_LEFT">
+        <Label text="NovaSys Desktop - Gestao de Produtos e Inventario" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Voltar ao Painel" onAction="#aoClicarVoltar" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="15" style="-fx-padding: 15px;">
+        
+        <!-- PAINEL ESQUERDO: Formulario de Registo -->
+        <VBox prefWidth="350" spacing="15" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <Label text="Dados do Produto" style="-fx-font-weight: bold; -fx-font-size: 15px;"/>
+            <Separator/>
+            
+            <VBox spacing="2">
+                <Label text="Nome do Artigo *" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtNome" promptText="Ex: Camisa, Tenis, etc." style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Codigo de Barras (Opcional)" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtCodigoBarras" promptText="Ex: 789123456789" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <HBox spacing="10">
+                <VBox HBox.hgrow="ALWAYS" spacing="2">
+                    <Label text="Preco Custo (MT)" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="txtPrecoCusto" promptText="0.00" style="-fx-pref-height: 35px;"/>
+                </VBox>
+                <VBox HBox.hgrow="ALWAYS" spacing="2">
+                    <Label text="Preco Venda (MT) *" style="-fx-font-weight: bold; -fx-text-fill: #b91c1c;"/>
+                    <TextField fx:id="txtPrecoVenda" promptText="0.00" style="-fx-pref-height: 35px;"/>
+                </VBox>
+            </HBox>
+
+            <HBox spacing="10">
+                <VBox HBox.hgrow="ALWAYS" spacing="2">
+                    <Label text="Stock Inicial/Atual" style="-fx-font-weight: bold;"/>
+                    <TextField fx:id="txtStockActual" promptText="0" style="-fx-pref-height: 35px;"/>
+                </VBox>
+                <VBox HBox.hgrow="ALWAYS" spacing="2">
+                    <Label text="Stock Minimo" style="-fx-font-weight: bold; -fx-text-fill: #b45309;"/>
+                    <TextField fx:id="txtStockMinimo" promptText="5" style="-fx-pref-height: 35px;"/>
+                </VBox>
+            </HBox>
+
+            <Label fx:id="lblMensagemCrud" wrapText="true" style="-fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <HBox spacing="10">
+                <Button text="Salvar" onAction="#salvarProduto" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 40px;"/>
+                <Button text="Limpar" onAction="#limparFormulario" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #64748b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 40px;"/>
+            </HBox>
+            <Button text="Apagar Produto" onAction="#apagarProduto" maxWidth="Infinity" style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 35px;"/>
+        </VBox>
+
+        <!-- PAINEL DIREITO: Tabela e Pesquisa -->
+        <VBox HBox.hgrow="ALWAYS" spacing="10" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <Label text="Pesquisar:" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtPesquisa" promptText="Pesquisar por nome ou codigo..." HBox.hgrow="ALWAYS" style="-fx-pref-height: 35px;"/>
+            </HBox>
+            
+            <TableView fx:id="tabelaProdutos" VBox.vgrow="ALWAYS" onMouseClicked="#selecionarProduto">
+                <columns>
+                    <TableColumn fx:id="colId" text="ID" prefWidth="40"/>
+                    <TableColumn fx:id="colNome" text="Nome do Produto" prefWidth="250"/>
+                    <TableColumn fx:id="colCodigo" text="Cod. Barras" prefWidth="120"/>
+                    <TableColumn fx:id="colCusto" text="P. Custo (MT)" prefWidth="100"/>
+                    <TableColumn fx:id="colVenda" text="P. Venda (MT)" prefWidth="100"/>
+                    <TableColumn fx:id="colStock" text="Stock Atual" prefWidth="90"/>
+                    <TableColumn fx:id="colStockMin" text="Stock Min" prefWidth="90"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.novasys.controller.LoginController" style="-fx-background-color: #f1f5f9;">
+    <VBox alignment="CENTER" maxWidth="400" maxHeight="480" spacing="15" style="-fx-background-color: white; -fx-padding: 30px; -fx-background-radius: 12px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.1), 15, 0, 0, 4);">
+        <Label text="NovaSys" style="-fx-font-size: 28px; -fx-font-weight: bold; -fx-text-fill: #0f172a;"/>
+        <Label text="Inicie sessao para continuar" style="-fx-font-size: 14px; -fx-text-fill: #64748b; -fx-padding: 0 0 15 0;"/>
+
+        <VBox spacing="5" alignment="CENTER_LEFT" maxWidth="Infinity">
+            <Label text="Utilizador" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <TextField fx:id="txtUtilizador" promptText="Nome de utilizador..." style="-fx-pref-height: 38px;"/>
+        </VBox>
+
+        <VBox spacing="5" alignment="CENTER_LEFT" maxWidth="Infinity">
+            <Label text="Senha" style="-fx-font-weight: bold; -fx-text-fill: #334155;"/>
+            <HBox spacing="5" alignment="CENTER">
+                <StackPane HBox.hgrow="ALWAYS">
+                    <PasswordField fx:id="txtSenha" promptText="Palavra-passe..." style="-fx-pref-height: 38px;"/>
+                    <TextField fx:id="txtSenhaVisivel" promptText="Palavra-passe..." style="-fx-pref-height: 38px;" visible="false"/>
+                </StackPane>
+                <Button fx:id="btnVerSenha" text="Eye" onAction="#alternarVisualizacaoSenha" style="-fx-pref-height: 38px; -fx-pref-width: 50px; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+
+        <Label fx:id="lblMensagem" wrapText="true" textAlignment="CENTER"/>
+
+        <Button text="Entrar" onAction="#entrar" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-height: 40px; -fx-cursor: hand; -fx-background-radius: 6px;" maxWidth="Infinity"/>
+    </VBox>
+</StackPane>

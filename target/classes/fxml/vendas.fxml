@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.novasys.controller.VendaController" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #f8fafc;">
+    
+    <!-- CABEÇALHO -->
+    <HBox style="-fx-background-color: #0f172a; -fx-padding: 15px 25px;" alignment="CENTER_LEFT">
+        <Label text="NovaSys Desktop - Terminal de Vendas (PDV)" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Voltar ao Painel" onAction="#aoClicarVoltar" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="15" style="-fx-padding: 15px;">
+        
+        <!-- PAINEL ESQUERDO: Pesquisa e Seleção de Produtos -->
+        <VBox prefWidth="350" spacing="10" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <Label text="1. Pesquisar Produto" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+            <TextField fx:id="txtPesquisaProduto" promptText="Nome ou código de barras..." style="-fx-pref-height: 35px;"/>
+            
+            <TableView fx:id="tabelaProdutosPesquisa" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colBuscaNome" text="Produto" prefWidth="180"/>
+                    <TableColumn fx:id="colBuscaPreco" text="Preço" prefWidth="70"/>
+                    <TableColumn fx:id="colBuscaStock" text="Stock" prefWidth="60"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="10" alignment="CENTER_LEFT">
+                <Label text="Qtd:" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtQuantidade" text="1" prefWidth="60" style="-fx-pref-height: 35px;"/>
+                <Button text="Adicionar ao Carrinho" onAction="#adicionarItem" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-height: 35px; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+
+        <!-- PAINEL CENTRAL: Carrinho de Compras -->
+        <VBox HBox.hgrow="ALWAYS" spacing="10" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <Label text="2. Carrinho de Compras" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+            
+            <TableView fx:id="tabelaCarrinho" VBox.vgrow="ALWAYS">
+                <columns>
+                    <TableColumn fx:id="colCarNome" text="Produto" prefWidth="250"/>
+                    <TableColumn fx:id="colCarQtd" text="Qtd" prefWidth="60"/>
+                    <TableColumn fx:id="colCarPreco" text="P. Unit" prefWidth="90"/>
+                    <TableColumn fx:id="colCarSubtotal" text="Subtotal" prefWidth="100"/>
+                </columns>
+            </TableView>
+
+            <HBox spacing="10">
+                <Button text="Remover Item" onAction="#removerItem" style="-fx-background-color: #f59e0b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+                <Region HBox.hgrow="ALWAYS"/>
+                <Button text="Esvaziar Carrinho" onAction="#cancelarVenda" style="-fx-background-color: #ef4444; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+            </HBox>
+        </VBox>
+
+        <!-- PAINEL DIREITO: Pagamento e Finalização -->
+        <VBox prefWidth="300" spacing="12" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <Label text="3. Resumo e Pagamento" style="-fx-font-weight: bold; -fx-font-size: 14px;"/>
+            <Separator/>
+            
+            <VBox spacing="2">
+                <Label text="Total Bruto (MT):" style="-fx-text-fill: #64748b;"/>
+                <Label fx:id="lblTotalBruto" text="0.00" style="-fx-font-size: 22px; -fx-font-weight: bold;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Desconto (MT):" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtDesconto" promptText="0.00" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Total a Pagar (MT):" style="-fx-font-weight: bold; -fx-text-fill: #b91c1c;"/>
+                <Label fx:id="lblTotalLiquido" text="0.00" style="-fx-font-size: 26px; -fx-font-weight: bold; -fx-text-fill: #b91c1c;"/>
+            </VBox>
+            
+            <Separator/>
+
+            <VBox spacing="2">
+                <Label text="Forma de Pagamento:" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="cmbFormaPagamento" maxWidth="Infinity" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Cliente (Para Fiado):" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="cmbCliente" maxWidth="Infinity" promptText="Consumidor Final" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Valor Entregue (MT):" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtValorPago" promptText="0.00" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Troco (MT):" style="-fx-text-fill: #64748b;"/>
+                <Label fx:id="lblTroco" text="0.00" style="-fx-font-size: 20px; -fx-font-weight: bold; -fx-text-fill: #16a34a;"/>
+            </VBox>
+
+            <Label fx:id="lblMensagem" wrapText="true" style="-fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+            <Region VBox.vgrow="ALWAYS"/>
+            
+            <Button text="FINALIZAR VENDA" onAction="#finalizarVenda" maxWidth="Infinity" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 16px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+        </VBox>
+    </HBox>
+</VBox>

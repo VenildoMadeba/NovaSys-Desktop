@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.novasys.controller.UtilizadoresController" prefHeight="720.0" prefWidth="1024.0" style="-fx-background-color: #f8fafc;">
+    
+    <HBox style="-fx-background-color: #0f172a; -fx-padding: 15px 25px;" alignment="CENTER_LEFT">
+        <Label text="NovaSys Desktop - Gestao de Utilizadores e Acessos" style="-fx-text-fill: white; -fx-font-size: 18px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Button text="Voltar ao Painel" onAction="#aoClicarVoltar" style="-fx-background-color: #3b82f6; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" spacing="15" style="-fx-padding: 15px;">
+        <!-- PAINEL ESQUERDO: Formulario -->
+        <VBox prefWidth="320" spacing="15" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <Label text="Dados do Utilizador" style="-fx-font-weight: bold; -fx-font-size: 15px;"/>
+            <Separator/>
+            
+            <VBox spacing="2">
+                <Label text="Nome Completo *" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtNome" promptText="Nome completo..." style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Nome de Acesso (Username) *" style="-fx-font-weight: bold;"/>
+                <TextField fx:id="txtUsername" promptText="Apenas letras/numeros..." style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Palavra-passe *" style="-fx-font-weight: bold;"/>
+                <PasswordField fx:id="txtSenha" promptText="*****" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <VBox spacing="2">
+                <Label text="Perfil de Acesso *" style="-fx-font-weight: bold;"/>
+                <ComboBox fx:id="cmbPerfil" maxWidth="Infinity" style="-fx-pref-height: 35px;"/>
+            </VBox>
+
+            <Label fx:id="lblMensagemCrud" wrapText="true" style="-fx-font-weight: bold; -fx-text-fill: #ef4444;"/>
+            <Region VBox.vgrow="ALWAYS"/>
+
+            <HBox spacing="10">
+                <Button text="Salvar" onAction="#salvarUtilizador" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #16a34a; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 40px;"/>
+                <Button text="Limpar" onAction="#limparFormulario" HBox.hgrow="ALWAYS" maxWidth="Infinity" style="-fx-background-color: #64748b; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 40px;"/>
+            </HBox>
+            <Button text="Apagar Utilizador" onAction="#apagarUtilizador" maxWidth="Infinity" style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand; -fx-pref-height: 35px;"/>
+        </VBox>
+
+        <!-- PAINEL DIREITO: Tabela -->
+        <VBox HBox.hgrow="ALWAYS" spacing="10" style="-fx-background-color: white; -fx-padding: 15px; -fx-background-radius: 8px; -fx-effect: dropshadow(three-pass-box, rgba(0,0,0,0.05), 10, 0, 0, 2);">
+            <TableView fx:id="tabelaUtilizadores" VBox.vgrow="ALWAYS" onMouseClicked="#selecionarUtilizador">
+                <columns>
+                    <TableColumn fx:id="colNome" text="Nome Completo" prefWidth="250"/>
+                    <TableColumn fx:id="colUsername" text="Nome de Acesso" prefWidth="180"/>
+                    <TableColumn fx:id="colPerfil" text="Perfil de Acesso" prefWidth="180"/>
+                </columns>
+            </TableView>
+        </VBox>
+    </HBox>
+</VBox>

@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.Font?>
+
+<VBox xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="mz.novasys.controller.DashboardController" prefHeight="720.0" prefWidth="1024.0" spacing="0">
+    <HBox style="-fx-background-color: #0f172a; -fx-padding: 15px 25px;" alignment="CENTER_LEFT">
+        <Label text="NovaSys Desktop" style="-fx-text-fill: white; -fx-font-size: 20px; -fx-font-weight: bold;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label fx:id="lblOperador" style="-fx-text-fill: #94a3b8; -fx-font-weight: bold; -fx-padding: 0 15px 0 0;"/>
+        <Label fx:id="lblStatusLicenca" style="-fx-text-fill: #fbbf24; -fx-font-weight: bold; -fx-padding: 0 20px 0 0;"/>
+        <Button text="Sair" onAction="#aoClicarSair" style="-fx-background-color: #dc2626; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"/>
+    </HBox>
+
+    <HBox VBox.vgrow="ALWAYS" style="-fx-background-color: #f1f5f9;">
+        <!-- Menu Central -->
+        <FlowPane hgap="15" vgap="15" alignment="CENTER" style="-fx-padding: 40px;" HBox.hgrow="ALWAYS">
+            <Button fx:id="btnVendas" text="Vendas" onAction="#abrirVendas" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 140px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+            <Button fx:id="btnCaixa" text="Caixa" onAction="#abrirCaixa" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 140px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+            <Button fx:id="btnClientes" text="Clientes" onAction="#abrirClientes" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 140px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+            <Button fx:id="btnProdutos" text="Produtos" onAction="#abrirProdutos" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 140px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+            <Button fx:id="btnStock" text="Stock" onAction="#abrirStock" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 140px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+            <Button fx:id="btnRelatorios" text="Relatorios" onAction="#abrirRelatorios" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 140px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+            <Button fx:id="btnUtilizadores" text="Utilizadores" onAction="#abrirUtilizadores" style="-fx-background-color: #2563eb; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-width: 140px; -fx-pref-height: 50px; -fx-cursor: hand;"/>
+        </FlowPane>
+
+        <!-- Painel de Notificacoes Lateral -->
+        <VBox prefWidth="350" style="-fx-background-color: white; -fx-border-color: #e2e8f0; -fx-border-width: 0 0 0 1; -fx-padding: 20px;" spacing="15">
+            <Label text="Centro de Notificacoes" style="-fx-font-size: 16px; -fx-font-weight: bold; -fx-text-fill: #1e293b;"/>
+            <Separator/>
+            <ListView fx:id="listaNotificacoes" VBox.vgrow="ALWAYS" style="-fx-background-color: transparent; -fx-border-color: transparent;"/>
+            <VBox fx:id="painelRenovacao" spacing="10" style="-fx-background-color: #fffbeb; -fx-padding: 15px; -fx-border-color: #fcd34d; -fx-border-radius: 5px;">
+                <Label text="Gestao de Licenca" style="-fx-font-weight: bold; -fx-text-fill: #92400e;"/>
+                <Label fx:id="lblInfoLicenca" text="Insira o codigo para ativar/renovar" wrapText="true" style="-fx-text-fill: #92400e; -fx-font-size: 11px;"/>
+                <HBox spacing="5">
+                    <TextField fx:id="txtChaveLicenca" promptText="Chave de ativacao..." HBox.hgrow="ALWAYS" style="-fx-pref-height: 35px;"/>
+                    <Button text="Validar" onAction="#validarLicenca" style="-fx-background-color: #d97706; -fx-text-fill: white; -fx-font-weight: bold; -fx-pref-height: 35px; -fx-cursor: hand;"/>
+                </HBox>
+            </VBox>
+        </VBox>
+    </HBox>
+
+    <HBox style="-fx-background-color: #0f172a; -fx-padding: 8px 20px;" alignment="CENTER_LEFT">
+        <Label text="Suporte: venildojosemadeba@gmail.com" style="-fx-text-fill: #94a3b8; -fx-font-size: 11px;"/>
+        <Region HBox.hgrow="ALWAYS"/>
+        <Label text="2026 NovaSys v1.0.0 - Todos os direitos reservados" style="-fx-text-fill: #94a3b8; -fx-font-size: 11px;"/>
+    </HBox>
+</VBox>
